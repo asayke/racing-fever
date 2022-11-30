@@ -59,7 +59,6 @@ public class CarAI : MonoBehaviour
 
     void Start()
     {
-        //ПЛОХА!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         GetComponent<Rigidbody>().centerOfMass = Vector3.zero;
         CalculateNavMashLayerBite();
     }
@@ -87,8 +86,7 @@ public class CarAI : MonoBehaviour
         }
     }
 
-    private void
-        PathProgress() //Checks if the agent has reached the currentWayPoint or not. If yes, it will assign the next waypoint as the currentWayPoint depending on the input
+    private void PathProgress()
     {
         wayPointManager();
         Movement();
@@ -102,37 +100,19 @@ public class CarAI : MonoBehaviour
             {
                 PostionToFollow = waypoints[currentWayPoint];
                 allowMovement = true;
-                if (Vector3.Distance(carFront.position, PostionToFollow) < 2)
+                if (Vector3.Distance(carFront.position, PostionToFollow) < 5)
                     currentWayPoint++;
             }
 
             if (currentWayPoint >= waypoints.Count - 3)
-            {
                 if (_destanations.Count >= _destanationIndex + 1)
                 {
                     CreatePath(_destanations[_destanationIndex]);
                     _destanationIndex++;
                 }
-            }
         }
 
-        void CreatePath(Transform destanation)
-        {
-            if (false)
-            {
-                if (Patrol == true)
-                {
-                    RandomPath();
-                }
-                else
-                {
-                    debug("No custom destination assigned and Patrol is set to false", false);
-                    allowMovement = false;
-                }
-            }
-            else if (true)
-                CustomPath(destanation);
-        }
+        void CreatePath(Transform destanation) => CustomPath(destanation);
 
         void ListOptimizer()
         {
@@ -144,7 +124,7 @@ public class CarAI : MonoBehaviour
         }
     }
 
-    public void RandomPath() // Creates a path to a random destination
+    public void RandomPath()
     {
         NavMeshPath path = new NavMeshPath();
         Vector3 sourcePostion;
@@ -170,7 +150,6 @@ public class CarAI : MonoBehaviour
             if (NavMesh.SamplePosition(destination, out NavMeshHit hit, 150,
                     1 << NavMesh.GetAreaFromName(NavMeshLayers[0])) &&
                 NavMesh.CalculatePath(sourcePostion, hit.position, NavMeshAreaByte, path) && path.corners.Length > 2)
-            {
                 if (CheckForAngle(path.corners[1], sourcePostion, direction))
                 {
                     waypoints.AddRange(path.corners.ToList());
@@ -190,7 +169,6 @@ public class CarAI : MonoBehaviour
                         Fails++;
                     }
                 }
-            }
             else
             {
                 debug("Failed to generate a random path. Invalid Path. Generating a new one", false);
@@ -199,7 +177,7 @@ public class CarAI : MonoBehaviour
         }
     }
 
-    public void CustomPath(Transform destination) //Creates a path to the Custom destination
+    public void CustomPath(Transform destination)
     {
         NavMeshPath path = new NavMeshPath();
         Vector3 sourcePostion;
@@ -220,9 +198,7 @@ public class CarAI : MonoBehaviour
         {
             if (NavMesh.SamplePosition(destination, out NavMeshHit hit, 1000, NavMeshAreaBite) &&
                 NavMesh.CalculatePath(sourcePostion, hit.position, NavMeshAreaBite, path))
-            {
                 waypoints.AddRange(path.corners.ToList());
-            }
 
             else
             {
@@ -232,9 +208,7 @@ public class CarAI : MonoBehaviour
         }
     }
 
-    private bool
-        CheckForAngle(Vector3 pos, Vector3 source,
-            Vector3 direction) //calculates the angle between the car and the waypoint 
+    private bool CheckForAngle(Vector3 pos, Vector3 source, Vector3 direction)
     {
         Vector3 distance = (pos - source).normalized;
         float CosAngle = Vector3.Dot(distance, direction);
@@ -243,7 +217,7 @@ public class CarAI : MonoBehaviour
         return Angle < AIFOV;
     }
 
-    private void ApplyBrakes() // Apply brake torque 
+    private void ApplyBrakes()
     {
         frontLeft.brakeTorque = 5000;
         frontRight.brakeTorque = 5000;
@@ -251,7 +225,7 @@ public class CarAI : MonoBehaviour
         backRight.brakeTorque = 5000;
     }
 
-    private void UpdateWheels() // Updates the wheel's postion and rotation
+    private void UpdateWheels()
     {
         ApplyRotationAndPostion(frontLeft, wheelFL);
         ApplyRotationAndPostion(frontRight, wheelFR);
@@ -259,8 +233,7 @@ public class CarAI : MonoBehaviour
         ApplyRotationAndPostion(backRight, wheelBR);
     }
 
-    private void
-        ApplyRotationAndPostion(WheelCollider targetWheel, Transform wheel) // Updates the wheel's postion and rotation
+    private void ApplyRotationAndPostion(WheelCollider targetWheel, Transform wheel) // Updates the wheel's postion and rotation
     {
         targetWheel.ConfigureVehicleSubsteps(5, 12, 15);
 
@@ -271,7 +244,7 @@ public class CarAI : MonoBehaviour
         wheel.rotation = rot;
     }
 
-    void ApplySteering() // Applies steering to the Current waypoint
+    void ApplySteering()
     {
         Vector3 relativeVector = transform.InverseTransformPoint(PostionToFollow);
         float SteeringAngle = (relativeVector.x / relativeVector.magnitude) * MaxSteeringAngle;
@@ -282,7 +255,7 @@ public class CarAI : MonoBehaviour
         frontRight.steerAngle = SteeringAngle;
     }
 
-    void Movement() // moves the car forward and backward depending on the input
+    void Movement()
     {
         if (move == true && allowMovement == true)
             allowMovement = true;
@@ -330,7 +303,7 @@ public class CarAI : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos() // shows a Gizmos representing the waypoints and AI FOV
+    private void OnDrawGizmos()
     {
         if (ShowGizmos == true)
         {
