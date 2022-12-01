@@ -7,7 +7,6 @@ public class CarAI : MonoBehaviour
 {
     [Header("Car Wheels (Wheel Collider)")] // Assign wheel Colliders through the inspector
     public WheelCollider frontLeft;
-
     public WheelCollider frontRight;
     public WheelCollider backLeft;
     public WheelCollider backRight;
@@ -46,7 +45,9 @@ public class CarAI : MonoBehaviour
     private List<Vector3> waypoints = new List<Vector3>();
     private float LocalMaxSpeed;
     private int Fails;
-    private float MovementTorque = 1;
+    
+    [HideInInspector] public float MovementTorque = 1;
+    [HideInInspector] public bool BackMovement;
     [SerializeField] private List<Transform> _destanations;
     private int _destanationIndex;
 
@@ -100,7 +101,7 @@ public class CarAI : MonoBehaviour
             {
                 PostionToFollow = waypoints[currentWayPoint];
                 allowMovement = true;
-                if (Vector3.Distance(carFront.position, PostionToFollow) < 5)
+                if (Vector3.Distance(carFront.position, PostionToFollow) < 10)
                     currentWayPoint++;
             }
 
@@ -251,8 +252,17 @@ public class CarAI : MonoBehaviour
         if (SteeringAngle > 15) LocalMaxSpeed = 100;
         else LocalMaxSpeed = MaxRPM;
 
-        frontLeft.steerAngle = SteeringAngle;
-        frontRight.steerAngle = SteeringAngle;
+        if (!BackMovement)
+        {
+            frontLeft.steerAngle = SteeringAngle;
+            frontRight.steerAngle = SteeringAngle;
+        }
+        else
+        {
+            frontLeft.steerAngle = -SteeringAngle;
+            frontRight.steerAngle = -SteeringAngle;
+        }
+        
     }
 
     void Movement()
@@ -262,7 +272,7 @@ public class CarAI : MonoBehaviour
         else
             allowMovement = false;
 
-        if (allowMovement == true)
+        if (allowMovement)
         {
             frontLeft.brakeTorque = 0;
             frontRight.brakeTorque = 0;
