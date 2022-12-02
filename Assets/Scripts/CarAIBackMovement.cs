@@ -11,7 +11,7 @@ public class CarAIBackMovement : MonoBehaviour
     private void Awake()
     {
         _carAI = GetComponent<CarAI>();
-        _waiting = new WaitForSeconds(2.3f);
+        _waiting = new WaitForSeconds(1.5f);
         _backMoving = new WaitForSeconds(1.2f);
     }
 
