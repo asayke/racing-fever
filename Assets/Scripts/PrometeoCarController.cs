@@ -72,6 +72,8 @@ public class PrometeoCarController : MonoBehaviour
     WheelFrictionCurve RRwheelFriction;
     float RRWextremumSlip;
 
+    public bool isMoveAllow;
+
     private void Awake() => carRigidbody = GetComponent<Rigidbody>();
 
     void Start()
@@ -127,6 +129,8 @@ public class PrometeoCarController : MonoBehaviour
 
     void Update()
     {
+        if(!isMoveAllow)
+            return;
         carSpeed = (2 * Mathf.PI * frontLeftCollider.radius * frontLeftCollider.rpm * 60) / 1000;
         localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
         localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;

@@ -51,6 +51,8 @@ public class CarAI : MonoBehaviour
     [SerializeField] private List<Transform> _destanations;
     private int _destanationIndex;
 
+    public bool IsBraking;
+
     void Awake()
     {
         currentWayPoint = 0;
@@ -272,7 +274,7 @@ public class CarAI : MonoBehaviour
         else
             allowMovement = false;
 
-        if (allowMovement)
+        if (allowMovement && !IsBraking)
         {
             frontLeft.brakeTorque = 0;
             frontRight.brakeTorque = 0;
@@ -283,10 +285,11 @@ public class CarAI : MonoBehaviour
 
             if (SpeedOfWheels < LocalMaxSpeed)
             {
-                backRight.motorTorque = 400 * MovementTorque;
-                backLeft.motorTorque = 400 * MovementTorque;
-                frontRight.motorTorque = 400 * MovementTorque;
-                frontLeft.motorTorque = 400 * MovementTorque;
+                print("curr speed "+frontLeft.rpm);
+                backRight.motorTorque = 800 * MovementTorque;
+                backLeft.motorTorque = 800 * MovementTorque;
+                frontRight.motorTorque = 800 * MovementTorque;
+                frontLeft.motorTorque = 800 * MovementTorque;
             }
             else if (SpeedOfWheels < LocalMaxSpeed + (LocalMaxSpeed * 1 / 4))
             {
