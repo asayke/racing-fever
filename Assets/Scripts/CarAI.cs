@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CarAI : MonoBehaviour
+public class CarAI : Car
 {
     [Header("Car Wheels (Wheel Collider)")] // Assign wheel Colliders through the inspector
     public WheelCollider frontLeft;
@@ -202,7 +202,7 @@ public class CarAI : MonoBehaviour
             if (NavMesh.SamplePosition(destination, out NavMeshHit hit, 1000, NavMeshAreaBite) &&
                 NavMesh.CalculatePath(sourcePostion, hit.position, NavMeshAreaBite, path))
                 waypoints.AddRange(path.corners.ToList());
-
+            
             else
             {
                 debug("Failed to generate a Custom path. Invalid Path. Generating a new one", false);
@@ -222,10 +222,10 @@ public class CarAI : MonoBehaviour
 
     private void ApplyBrakes()
     {
-        frontLeft.brakeTorque = 5000;
-        frontRight.brakeTorque = 5000;
-        backLeft.brakeTorque = 5000;
-        backRight.brakeTorque = 5000;
+        frontLeft.brakeTorque = 6000;
+        frontRight.brakeTorque = 6000;
+        backLeft.brakeTorque = 6000;
+        backRight.brakeTorque = 6000;
     }
 
     private void UpdateWheels()
@@ -285,11 +285,10 @@ public class CarAI : MonoBehaviour
 
             if (SpeedOfWheels < LocalMaxSpeed)
             {
-                print("curr speed "+frontLeft.rpm);
-                backRight.motorTorque = 800 * MovementTorque;
-                backLeft.motorTorque = 800 * MovementTorque;
-                frontRight.motorTorque = 800 * MovementTorque;
-                frontLeft.motorTorque = 800 * MovementTorque;
+                backRight.motorTorque = 4000 * MovementTorque;
+                backLeft.motorTorque = 4000 * MovementTorque;
+                frontRight.motorTorque = 4000 * MovementTorque;
+                frontLeft.motorTorque = 4000 * MovementTorque;
             }
             else if (SpeedOfWheels < LocalMaxSpeed + (LocalMaxSpeed * 1 / 4))
             {

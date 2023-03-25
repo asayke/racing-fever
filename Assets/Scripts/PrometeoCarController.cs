@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PrometeoCarController : MonoBehaviour
+public class PrometeoCarController : Car
 {
     [Space(30)] [Range(20, 190)] [SerializeField]
     private int maxSpeed = 90;

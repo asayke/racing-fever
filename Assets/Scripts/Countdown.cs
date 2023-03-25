@@ -27,9 +27,7 @@ public class Countdown : MonoBehaviour
         while (currSec >= 0)
         {
             _text.SetText(currSec.ToString());
-            print("start cour");
             yield return new WaitForSeconds(1);
-            print("cour");
             currSec--;
         }
         

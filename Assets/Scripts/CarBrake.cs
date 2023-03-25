@@ -40,13 +40,13 @@ public class CarBrake : MonoBehaviour
                 break;
             float dist = Vector3.Distance(currHit.point, _carAI.carFront.position);
             float motorTorque = dist / firstDist * firstMotorTorque;
+            print(_carAI.frontLeft.rpm + " " + dist);
             _carAI.IsBraking = true;
             _carAI.backRight.motorTorque = motorTorque;
             _carAI.backLeft.motorTorque = motorTorque;
             _carAI.frontRight.motorTorque = motorTorque;
             _carAI.frontLeft.motorTorque = motorTorque;
             
-            print("movement torque "+_carAI.MovementTorque);
             yield return new WaitForSeconds(0.01f);
         }
 
