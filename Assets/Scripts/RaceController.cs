@@ -20,8 +20,23 @@ public class RaceController : MonoBehaviour
         _finishTrigger.OnFinished -= OnFinish;
     }
 
-    private void OnFinish()
+    private void OnFinish(CarFinishChecker car)
     {
         Debug.Log("on finish");
+        StartCoroutine(car.FinishIntersectTimer());
+        if (car.CarComponent.isFirstLap)
+        {
+            car.CarComponent.isFirstLap = false;
+            return;
+        }
+        CountLap(car.CarComponent);
+    }
+
+    private void CountLap(Car car)
+    {
+        car.CarLapInfo.CountLaps++;
+        car.CarLapInfo.LapTimes.Add(car.CarLapTimer.Timer);
+        car.CarLapTimer.ResetTimer();
+        print("lap info: "+car.CarLapInfo.CountLaps+" "+car.CarLapInfo.LapTimes[^1]);
     }
 }

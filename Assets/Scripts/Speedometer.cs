@@ -16,6 +16,6 @@ public class Speedometer : MonoBehaviour
 
     private void Update()
     {
-        _text.SetText($"Speed: {(int)_carController.carSpeed} km/h");
+        _text.SetText($"Speed: {Math.Abs((int)_carController.carSpeed)} km/h");
     }
 }

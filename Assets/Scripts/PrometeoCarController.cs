@@ -135,47 +135,47 @@ public class PrometeoCarController : Car
         localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
         localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
 
-        if (Input.GetKey(KeyCode.W))
+        if (SimpleInput.GetKey(KeyCode.W))
         {
             CancelInvoke("DecelerateCar");
             deceleratingCar = false;
             GoForward();
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (SimpleInput.GetKey(KeyCode.S))
         {
             CancelInvoke("DecelerateCar");
             deceleratingCar = false;
             GoReverse();
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (SimpleInput.GetKey(KeyCode.A))
             TurnLeft();
 
-        if (Input.GetKey(KeyCode.D))
+        if (SimpleInput.GetKey(KeyCode.D))
             TurnRight();
 
-        if (Input.GetKey(KeyCode.Space))
+        if (SimpleInput.GetKey(KeyCode.Space))
         {
             CancelInvoke("DecelerateCar");
             deceleratingCar = false;
             Handbrake();
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (SimpleInput.GetKeyUp(KeyCode.Space))
             RecoverTraction();
 
-        if ((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W)))
+        if ((!SimpleInput.GetKey(KeyCode.S) && !SimpleInput.GetKey(KeyCode.W)))
             ThrottleOff();
 
-        if ((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W)) && !Input.GetKey(KeyCode.Space) &&
+        if ((!SimpleInput.GetKey(KeyCode.S) && !SimpleInput.GetKey(KeyCode.W)) && !SimpleInput.GetKey(KeyCode.Space) &&
             !deceleratingCar)
         {
             InvokeRepeating("DecelerateCar", 0f, 0.1f);
             deceleratingCar = true;
         }
 
-        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && steeringAxis != 0f)
+        if (!SimpleInput.GetKey(KeyCode.A) && !SimpleInput.GetKey(KeyCode.D) && steeringAxis != 0f)
             ResetSteeringAngle();
 
         AnimateWheelMeshes();

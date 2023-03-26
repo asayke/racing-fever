@@ -6,13 +6,16 @@ using UnityEngine;
 public class FinishTrigger : MonoBehaviour
 {
     [SerializeField] private LayerMask _carMask;
-    public event Action OnFinished;
-    
+    public event Action<CarFinishChecker> OnFinished;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.IsInLayerMask(_carMask))
         {
-            OnFinished?.Invoke();
+            CarFinishChecker car = other.gameObject.GetComponent<CarFinishChecker>();
+            if(car.IsFinishIntesected)
+                return;
+            OnFinished?.Invoke(car);
         }
     }
 }
