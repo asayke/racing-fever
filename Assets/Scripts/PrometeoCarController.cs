@@ -38,12 +38,16 @@ public class PrometeoCarController : Car
     [Space(20)] [Space(10)] public bool useTouchControls = false;
 
     public GameObject throttleButton;
+
 //    PrometeoTouchInput throttlePTI;
     public GameObject reverseButton;
-  //  PrometeoTouchInput reversePTI;
+
+    //  PrometeoTouchInput reversePTI;
     public GameObject turnRightButton;
+
     //PrometeoTouchInput turnRightPTI;
     public GameObject turnLeftButton;
+
     //PrometeoTouchInput turnLeftPTI;
     public GameObject handbrakeButton;
     //PrometeoTouchInput handbrakePTI;
@@ -114,9 +118,7 @@ public class PrometeoCarController : Car
             if (throttleButton != null && reverseButton != null &&
                 turnRightButton != null && turnLeftButton != null
                 && handbrakeButton != null)
-            {
                 touchControlsSetup = true;
-            }
             else
             {
                 String ex =
@@ -129,7 +131,7 @@ public class PrometeoCarController : Car
 
     void Update()
     {
-        if(!isMoveAllow)
+        if (!isMoveAllow)
             return;
         carSpeed = (2 * Mathf.PI * frontLeftCollider.radius * frontLeftCollider.rpm * 60) / 1000;
         localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;

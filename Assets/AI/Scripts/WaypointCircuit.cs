@@ -18,10 +18,7 @@ public class WaypointCircuit : MonoBehaviour
     public float editorVisualisationSubsteps = 100;
     public float Length { get; private set; }
 
-    public Transform[] Waypoints
-    {
-        get { return waypointList.items; }
-    }
+    public Transform[] Waypoints => waypointList.items;
 
     //this being here will save GC allocs
     private int p0n;
@@ -38,10 +35,8 @@ public class WaypointCircuit : MonoBehaviour
     // Use this for initialization
     private void Awake()
     {
-        if (Waypoints.Length > 1)
-        {
-            CachePositionsAndDistances();
-        }
+        if (Waypoints.Length > 1) CachePositionsAndDistances();
+
         numPoints = Waypoints.Length;
     }
 
@@ -60,17 +55,11 @@ public class WaypointCircuit : MonoBehaviour
     {
         int point = 0;
 
-        if (Length == 0)
-        {
-            Length = distances[distances.Length - 1];
-        }
+        if (Length == 0) Length = distances[distances.Length - 1];
 
         dist = Mathf.Repeat(dist, Length);
 
-        while (distances[point] < dist)
-        {
-            ++point;
-        }
+        while (distances[point] < dist) ++point;
 
 
         // get nearest two points, ensuring points wrap-around start & end of circuit
@@ -84,7 +73,6 @@ public class WaypointCircuit : MonoBehaviour
         if (smoothRoute)
         {
             // smooth catmull-rom calculation between the two relevant points
-
 
             // get indices for the surrounding 2 points, because
             // four points are required by the catmull-rom function
@@ -115,14 +103,12 @@ public class WaypointCircuit : MonoBehaviour
     }
 
 
-    private Vector3 CatmullRom(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float i)
-    {
+    private Vector3 CatmullRom(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, float i) =>
         // comments are no use here... it's the catmull-rom equation.
         // Un-magic this, lord vector!
-        return 0.5f *
-               ((2 * p1) + (-p0 + p2) * i + (2 * p0 - 5 * p1 + 4 * p2 - p3) * i * i +
-                (-p0 + 3 * p1 - 3 * p2 + p3) * i * i * i);
-    }
+        0.5f *
+        ((2 * p1) + (-p0 + p2) * i + (2 * p0 - 5 * p1 + 4 * p2 - p3) * i * i +
+         (-p0 + 3 * p1 - 3 * p2 + p3) * i * i * i);
 
 
     private void CachePositionsAndDistances()
@@ -149,17 +135,10 @@ public class WaypointCircuit : MonoBehaviour
     }
 
 
-    private void OnDrawGizmos()
-    {
-        DrawGizmos(false);
-        
-    }
+    private void OnDrawGizmos() => DrawGizmos(false);
 
 
-    private void OnDrawGizmosSelected()
-    {
-        DrawGizmos(true);
-    }
+    private void OnDrawGizmosSelected() => DrawGizmos(true);
 
 
     private void DrawGizmos(bool selected)
@@ -182,18 +161,18 @@ public class WaypointCircuit : MonoBehaviour
                     Gizmos.DrawLine(prev, next);
                     prev = next;
                 }
+
                 Gizmos.DrawLine(prev, Waypoints[0].position);
             }
             else
-            {
                 for (int n = 0; n < Waypoints.Length; ++n)
                 {
                     Vector3 next = Waypoints[(n + 1) % Waypoints.Length].position;
                     Gizmos.DrawLine(prev, next);
                     prev = next;
                 }
-            }
         }
+
         foreach (Transform waypoint in Waypoints)
         {
             Gizmos.color = Color.magenta;
@@ -224,7 +203,6 @@ public class WaypointCircuit : MonoBehaviour
 }
 
 
-
 #if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(WaypointCircuit.WaypointList))]
 public class WaypointListDrawer : PropertyDrawer
@@ -243,19 +221,17 @@ public class WaypointListDrawer : PropertyDrawer
 
         // Draw label
 
-
         // Don't make child fields be indented
         var indent = EditorGUI.indentLevel;
         EditorGUI.indentLevel = 0;
 
         var items = property.FindPropertyRelative("items");
-        var titles = new string[] { "Transform", "", "", "" };
-        var props = new string[] { "transform", "^", "v", "-" };
-        var widths = new float[] { .7f, .1f, .1f, .1f };
+        var titles = new string[] {"Transform", "", "", ""};
+        var props = new string[] {"transform", "^", "v", "-"};
+        var widths = new float[] {.7f, .1f, .1f, .1f};
         float lineHeight = 18;
         bool changedLength = false;
         if (items.arraySize > 0)
-        {
             for (int i = 0; i < items.arraySize; ++i)
             {
                 var item = items.GetArrayElementAtIndex(i);
@@ -270,60 +246,35 @@ public class WaypointListDrawer : PropertyDrawer
                     rowX += w;
 
                     if (i == -1)
-                    {
                         EditorGUI.LabelField(rect, titles[n]);
-                    }
-                    else
-                    {
-                        if (n == 0)
+                    else if (n == 0)
+                        EditorGUI.ObjectField(rect, item.objectReferenceValue, typeof(Transform), true);
+                    else if (GUI.Button(rect, props[n]))
+                        if (props[n] == "-")
                         {
-                            EditorGUI.ObjectField(rect, item.objectReferenceValue, typeof(Transform), true);
+                            items.DeleteArrayElementAtIndex(i);
+                            items.DeleteArrayElementAtIndex(i);
+                            changedLength = true;
                         }
-                        else
+                        else if (props[n] == "v")
                         {
-                            if (GUI.Button(rect, props[n]))
-                            {
-                                switch (props[n])
-                                {
-                                    case "-":
-                                        items.DeleteArrayElementAtIndex(i);
-                                        items.DeleteArrayElementAtIndex(i);
-                                        changedLength = true;
-                                        break;
-                                    case "v":
-                                        if (i > 0)
-                                        {
-                                            items.MoveArrayElement(i, i + 1);
-                                        }
-                                        break;
-                                    case "^":
-                                        if (i < items.arraySize - 1)
-                                        {
-                                            items.MoveArrayElement(i, i - 1);
-                                        }
-                                        break;
-                                }
-                            }
+                            if (i > 0) items.MoveArrayElement(i, i + 1);
                         }
-                    }
+                        else if (props[n] == "^")
+                            if (i < items.arraySize - 1)
+                                items.MoveArrayElement(i, i - 1);
                 }
 
                 y += lineHeight + spacing;
                 if (changedLength)
-                {
                     break;
-                }
             }
-        }
         else
         {
             // add button
             var addButtonRect = new Rect((x + position.width) - widths[widths.Length - 1] * inspectorWidth, y,
-                                         widths[widths.Length - 1] * inspectorWidth, lineHeight);
-            if (GUI.Button(addButtonRect, "+"))
-            {
-                items.InsertArrayElementAtIndex(items.arraySize);
-            }
+                widths[widths.Length - 1] * inspectorWidth, lineHeight);
+            if (GUI.Button(addButtonRect, "+")) items.InsertArrayElementAtIndex(items.arraySize);
 
             y += lineHeight + spacing;
         }
@@ -334,17 +285,12 @@ public class WaypointListDrawer : PropertyDrawer
         {
             var circuit = property.FindPropertyRelative("circuit").objectReferenceValue as WaypointCircuit;
             var children = new Transform[circuit.transform.childCount];
-            
-            for (int i = 0; i < circuit.transform.childCount; i++)
-            {
-                children[i] = circuit.transform.GetChild(i);
-            }
+
+            for (int i = 0; i < circuit.transform.childCount; i++) children[i] = circuit.transform.GetChild(i);
             circuit.waypointList.items = new Transform[children.Length];
-            for (int i = 0; i < children.Length; i++)
-            {
-                circuit.waypointList.items[i] = children[i];
-            }
+            for (int i = 0; i < children.Length; i++) circuit.waypointList.items[i] = children[i];
         }
+
         y += lineHeight + spacing;
 
         // rename all button
@@ -353,11 +299,9 @@ public class WaypointListDrawer : PropertyDrawer
         {
             var circuit = property.FindPropertyRelative("circuit").objectReferenceValue as WaypointCircuit;
             int n = 0;
-            foreach (Transform child in circuit.waypointList.items)
-            {
-                child.name = "Waypoint " + (n++).ToString("000");
-            }
+            foreach (Transform child in circuit.waypointList.items) child.name = "Waypoint " + (n++).ToString("000");
         }
+
         y += lineHeight + spacing;
 
         // Set indent back to what it was
@@ -377,11 +321,7 @@ public class WaypointListDrawer : PropertyDrawer
     // comparer for check distances in ray cast hits
     public class TransformNameComparer : IComparer
     {
-        public int Compare(object x, object y)
-        {
-            return ((Transform)x).name.CompareTo(((Transform)y).name);
-        }
+        public int Compare(object x, object y) => ((Transform) x).name.CompareTo(((Transform) y).name);
     }
 }
 #endif
-

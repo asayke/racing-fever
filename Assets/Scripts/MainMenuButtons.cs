@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,13 +13,7 @@ public class MainMenuButtons : MonoBehaviour
         _exit.onClick.AddListener(Exit);
     }
 
-    private void Play()
-    {
-        SceneManager.LoadScene(1);
-    }
+    private void Play() => SceneManager.LoadScene(1);
 
-    private void Exit()
-    {
-        Application.Quit();
-    }
+    private void Exit() => Application.Quit();
 }

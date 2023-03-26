@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -10,15 +9,9 @@ public class RaceController : MonoBehaviour
 
     [SerializeField] private FinishTrigger _finishTrigger;
 
-    private void OnEnable()
-    {
-        _finishTrigger.OnFinished += OnFinish;
-    }
+    private void OnEnable() => _finishTrigger.OnFinished += OnFinish;
 
-    private void OnDisable()
-    {
-        _finishTrigger.OnFinished -= OnFinish;
-    }
+    private void OnDisable() => _finishTrigger.OnFinished -= OnFinish;
 
     private void OnFinish(CarFinishChecker car)
     {

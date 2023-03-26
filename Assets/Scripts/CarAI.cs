@@ -80,13 +80,11 @@ public class CarAI : Car
         else if (NavMeshLayers.Count == 1)
             NavMeshLayerBite += 1 << NavMesh.GetAreaFromName(NavMeshLayers[0]);
         else
-        {
             foreach (string Layer in NavMeshLayers)
             {
                 int I = 1 << NavMesh.GetAreaFromName(Layer);
                 NavMeshLayerBite += I;
             }
-        }
     }
 
     private void PathProgress()
