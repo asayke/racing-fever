@@ -19,7 +19,7 @@ public class GameMenuButtons : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (SimpleInput.GetKeyDown(KeyCode.Escape))
         {
             _window.SetActive(true);
             Time.timeScale = 0;
