@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PrometeoCarController : MonoBehaviour
+public class PrometeoCarController : Car
 {
     [Space(30)] [Range(20, 190)] [SerializeField]
     private int maxSpeed = 90;
@@ -38,12 +38,16 @@ public class PrometeoCarController : MonoBehaviour
     [Space(20)] [Space(10)] public bool useTouchControls = false;
 
     public GameObject throttleButton;
+
 //    PrometeoTouchInput throttlePTI;
     public GameObject reverseButton;
-  //  PrometeoTouchInput reversePTI;
+
+    //  PrometeoTouchInput reversePTI;
     public GameObject turnRightButton;
+
     //PrometeoTouchInput turnRightPTI;
     public GameObject turnLeftButton;
+
     //PrometeoTouchInput turnLeftPTI;
     public GameObject handbrakeButton;
     //PrometeoTouchInput handbrakePTI;
@@ -114,9 +118,7 @@ public class PrometeoCarController : MonoBehaviour
             if (throttleButton != null && reverseButton != null &&
                 turnRightButton != null && turnLeftButton != null
                 && handbrakeButton != null)
-            {
                 touchControlsSetup = true;
-            }
             else
             {
                 String ex =
@@ -129,53 +131,53 @@ public class PrometeoCarController : MonoBehaviour
 
     void Update()
     {
-        if(!isMoveAllow)
+        if (!isMoveAllow)
             return;
         carSpeed = (2 * Mathf.PI * frontLeftCollider.radius * frontLeftCollider.rpm * 60) / 1000;
         localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
         localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
 
-        if (Input.GetKey(KeyCode.W))
+        if (SimpleInput.GetKey(KeyCode.W))
         {
             CancelInvoke("DecelerateCar");
             deceleratingCar = false;
             GoForward();
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (SimpleInput.GetKey(KeyCode.S))
         {
             CancelInvoke("DecelerateCar");
             deceleratingCar = false;
             GoReverse();
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (SimpleInput.GetKey(KeyCode.A))
             TurnLeft();
 
-        if (Input.GetKey(KeyCode.D))
+        if (SimpleInput.GetKey(KeyCode.D))
             TurnRight();
 
-        if (Input.GetKey(KeyCode.Space))
+        if (SimpleInput.GetKey(KeyCode.Space))
         {
             CancelInvoke("DecelerateCar");
             deceleratingCar = false;
             Handbrake();
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (SimpleInput.GetKeyUp(KeyCode.Space))
             RecoverTraction();
 
-        if ((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W)))
+        if ((!SimpleInput.GetKey(KeyCode.S) && !SimpleInput.GetKey(KeyCode.W)))
             ThrottleOff();
 
-        if ((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W)) && !Input.GetKey(KeyCode.Space) &&
+        if ((!SimpleInput.GetKey(KeyCode.S) && !SimpleInput.GetKey(KeyCode.W)) && !SimpleInput.GetKey(KeyCode.Space) &&
             !deceleratingCar)
         {
             InvokeRepeating("DecelerateCar", 0f, 0.1f);
             deceleratingCar = true;
         }
 
-        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && steeringAxis != 0f)
+        if (!SimpleInput.GetKey(KeyCode.A) && !SimpleInput.GetKey(KeyCode.D) && steeringAxis != 0f)
             ResetSteeringAngle();
 
         AnimateWheelMeshes();

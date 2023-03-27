@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class CarBrake : MonoBehaviour
@@ -11,11 +10,7 @@ public class CarBrake : MonoBehaviour
     private bool _isBraking;
     
 
-    private void Awake()
-    {
-        _carAI = GetComponent<CarAI>();
-        
-    }
+    private void Awake() => _carAI = GetComponent<CarAI>();
 
     private void Update()
     {
@@ -46,7 +41,6 @@ public class CarBrake : MonoBehaviour
             _carAI.frontRight.motorTorque = motorTorque;
             _carAI.frontLeft.motorTorque = motorTorque;
             
-            print("movement torque "+_carAI.MovementTorque);
             yield return new WaitForSeconds(0.01f);
         }
 

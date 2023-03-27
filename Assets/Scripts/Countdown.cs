@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -27,9 +25,7 @@ public class Countdown : MonoBehaviour
         while (currSec >= 0)
         {
             _text.SetText(currSec.ToString());
-            print("start cour");
             yield return new WaitForSeconds(1);
-            print("cour");
             currSec--;
         }
         
@@ -37,10 +33,7 @@ public class Countdown : MonoBehaviour
         {
             _text.enabled = false;
             FindObjectOfType<PrometeoCarController>().isMoveAllow = true;
-            foreach (var aiCar in _aiCars)
-            {
-                aiCar.IsBraking = false;
-            }
+            foreach (var aiCar in _aiCars) aiCar.IsBraking = false;
         }
         
     }

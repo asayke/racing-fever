@@ -6,33 +6,21 @@ EditorUserSettings:
   serializedVersion: 4
   m_ConfigSettings:
     RecentlyUsedSceneGuid-0:
-      value: 05055551505008085a5d0f7246200a4442164e7e7c7871617b2d1b32b0b6643c
-      flags: 0
-    RecentlyUsedSceneGuid-1:
-      value: 55060d03570d0d5f545c097548750c4444154f73787c72647a7b4f6be4b7643b
-      flags: 0
-    RecentlyUsedSceneGuid-2:
-      value: 5707065f03505c5d5b58547a1472094410161c792f702532742c4a65b3e2646e
-      flags: 0
-    RecentlyUsedSceneGuid-3:
-      value: 00575502010d510a5e5b0a7747765d44124e4a287d7c2469747d4563bab5373d
-      flags: 0
-    RecentlyUsedSceneGuid-4:
-      value: 5552515150510d5e540d087512755c444e4f4a7f2d7023682c7f4561b5e66d61
-      flags: 0
-    RecentlyUsedSceneGuid-5:
-      value: 520407540104595e5c0d087744260d44134f48722e7c706475284c63b1b8673e
-      flags: 0
-    RecentlyUsedSceneGuid-6:
-      value: 0503070452060a02580b597315220944474f1e7a7c2d76677d2d4b61b3e36469
-      flags: 0
-    RecentlyUsedSceneGuid-7:
       value: 01500453030c0c5e090a5f21467b0f44134f1b2e7f7f76327a7e4563b7e46c6c
       flags: 0
-    RecentlyUsedSceneGuid-8:
+    RecentlyUsedSceneGuid-1:
       value: 5a0200050156595f09595873447259444f4f417a7d787f672f7b4437b4e33260
       flags: 0
-    RecentlyUsedSceneGuid-9:
+    RecentlyUsedSceneGuid-2:
+      value: 0503070452060a02580b597315220944474f1e7a7c2d76677d2d4b61b3e36469
+      flags: 0
+    RecentlyUsedSceneGuid-3:
+      value: 0557500752560a5f0f0b5e7011275b44454f1c2b7b7c7661752b4a6ab1b1356e
+      flags: 0
+    RecentlyUsedSceneGuid-4:
+      value: 07050c5f5c0d0f035a0b0870487a0f444e151e7a7a7f7f6079781b65b3b96161
+      flags: 0
+    RecentlyUsedSceneGuid-5:
       value: 50000553560d0b085d0f5e274174064414154b73782b23332f7e4563e1e33568
       flags: 0
     vcSharedLogLevel:
@@ -43,7 +31,7 @@ EditorUserSettings:
   m_VCDebugCmd: 0
   m_VCDebugOut: 0
   m_SemanticMergeMode: 2
-  m_DesiredImportWorkerCount: 2
+  m_DesiredImportWorkerCount: 3
   m_StandbyImportWorkerCount: 2
   m_IdleImportWorkerShutdownDelay: 60000
   m_VCShowFailedCheckout: 1

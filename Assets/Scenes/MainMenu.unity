@@ -758,7 +758,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PLAY
+  m_text: "\u0418\u0413\u0420\u0410\u0422\u042C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4e90394a20f4abe4ab78e994b38a0371, type: 2}
   m_sharedMaterial: {fileID: 6700109621325470450, guid: 4e90394a20f4abe4ab78e994b38a0371, type: 2}
@@ -785,8 +785,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 48.62
+  m_fontSizeBase: 48.62
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -1015,7 +1015,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EXIT
+  m_text: "\u0412\u042B\u0425\u041E\u0414"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4e90394a20f4abe4ab78e994b38a0371, type: 2}
   m_sharedMaterial: {fileID: 6700109621325470450, guid: 4e90394a20f4abe4ab78e994b38a0371, type: 2}
@@ -1042,8 +1042,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 48.62
+  m_fontSizeBase: 48.62
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
