@@ -13,7 +13,7 @@ public class MainMenuButtons : MonoBehaviour
         _exit.onClick.AddListener(Exit);
     }
 
-    private void Play() => SceneManager.LoadScene(1);
+    private void Play() => SceneManager.LoadScene("SelectMode");
 
     private void Exit() => Application.Quit();
 }

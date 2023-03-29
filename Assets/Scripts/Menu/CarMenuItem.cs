@@ -6,5 +6,6 @@ public class CarMenuItem
 {
     public string Name;
     public Sprite Sprite;
-    public GameObject CarPrefab;
+    public GameObject PlayerCarPrefab;
+    public GameObject EnemyCarPrefab;
 }

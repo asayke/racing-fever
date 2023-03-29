@@ -6,21 +6,20 @@ public class Countdown : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
     private int currSec = 3;
-    private CarAI[] _aiCars;
+    private ArcadeAiVehicleController[] _aiCars;
+    private RaceController _raceController;
+    
 
-    private void Awake()
+    public void StartCountdown()
     {
         Time.timeScale = 1;
-        _aiCars = FindObjectsOfType<CarAI>();
-        foreach (var aiCar in _aiCars)
-        {
-            aiCar.IsBraking = true;
-        }
-
-        StartCoroutine(StartCountdown());
+        _text.enabled = true;
+        _aiCars = FindObjectsOfType<ArcadeAiVehicleController>();
+        _raceController = FindObjectOfType<RaceController>();
+        StartCoroutine(CountdownCoroutine());
     }
 
-    private IEnumerator StartCountdown()
+    private IEnumerator CountdownCoroutine()
     {
         while (currSec >= 0)
         {
@@ -33,7 +32,9 @@ public class Countdown : MonoBehaviour
         {
             _text.enabled = false;
             FindObjectOfType<PrometeoCarController>().isMoveAllow = true;
-            foreach (var aiCar in _aiCars) aiCar.IsBraking = false;
+            foreach (var aiCar in _aiCars) 
+                aiCar.enabled = true;
+            _raceController.StartRace();
         }
         
     }

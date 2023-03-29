@@ -1,13 +1,18 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Speedometer : MonoBehaviour
 {
-    [SerializeField] private PrometeoCarController _carController;
-    private TextMeshProUGUI _text;
+    private PrometeoCarController _carController;
+    private Text _text;
 
-    private void Awake() => _text = GetComponent<TextMeshProUGUI>();
+    private void Start()
+    {
+        _carController = FindObjectOfType<PrometeoCarController>();
+        _text = GetComponent<Text>();
+    } 
 
-    private void Update() => _text.SetText($"Speed: {Math.Abs((int)_carController.carSpeed)} km/h");
+    private void Update() => _text.text = $"Скорость: {Math.Abs((int)_carController.carSpeed)} км/ч";
 }

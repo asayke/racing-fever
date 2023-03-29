@@ -1,7 +1,8 @@
 ﻿
 using UnityEngine;
-
+[CreateAssetMenu]
 public class MapDatabase : ScriptableObject
 {
-    public MapMenuItem[] maps;
+    public MapMenuItem[] ringMaps;
+    public MapMenuItem[] sprintMaps;
 }

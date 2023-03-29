@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ArcadeAiVehicleController : MonoBehaviour
+public class ArcadeAiVehicleController : Car
 {
     public enum groundCheck
     {

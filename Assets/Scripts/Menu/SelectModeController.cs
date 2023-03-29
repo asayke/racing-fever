@@ -11,6 +11,7 @@ public class SelectModeController : MonoBehaviour
     [SerializeField] private GameObject _carSelector;
     [SerializeField] private GameObject _countPlayersSettings;
     [SerializeField] private GameObject _countLapsSettings;
+    [SerializeField] private GameObject _playButton;
 
     [SerializeField] private Image _carImage;
     [SerializeField] private Text _carName;
@@ -27,6 +28,7 @@ public class SelectModeController : MonoBehaviour
     [SerializeField] private int _maxCountLaps;
 
     private int _currCarIndex;
+    private MapMenuItem[] currMaps;
     private int _currMapIndex;
     private GameMode _currentGameMode;
     private int _countPlayers;
@@ -36,9 +38,16 @@ public class SelectModeController : MonoBehaviour
     {
         _mapSelector.SetActive(true);
         _carSelector.SetActive(true);
+        _playButton.SetActive(true);
         _countPlayersSettings.SetActive(true);
         if(_currentGameMode==GameMode.Ring)
             _countLapsSettings.SetActive(true);
+        
+        if (_currentGameMode == GameMode.Sprint)
+            currMaps = _mapDatabase.sprintMaps;
+        else
+            currMaps = _mapDatabase.ringMaps;
+        
         ShowCarItem();
         ShowMapItem();
     }
@@ -52,7 +61,7 @@ public class SelectModeController : MonoBehaviour
     
     public void ShowMapItem()
     {
-        MapMenuItem item = _mapDatabase.maps[_currMapIndex];
+        MapMenuItem item = currMaps[_currMapIndex];
         _mapImage.sprite = item.Sprite;
         _mapName.text = item.Name;
     }
@@ -75,7 +84,7 @@ public class SelectModeController : MonoBehaviour
     public void NextMap()
     {
         _currMapIndex++;
-        _currMapIndex = _currMapIndex % _mapDatabase.maps.Length;
+        _currMapIndex = _currMapIndex % currMaps.Length;
         ShowMapItem();
     }
 
@@ -83,7 +92,7 @@ public class SelectModeController : MonoBehaviour
     {
         _currMapIndex--;
         if (_currMapIndex < 0)
-            _currMapIndex = _mapDatabase.maps.Length - 1;
+            _currMapIndex = currMaps.Length - 1;
         ShowMapItem();
     }
     
@@ -118,10 +127,10 @@ public class SelectModeController : MonoBehaviour
     public void StartGame()
     {
         _gameSetup.GameMode = _currentGameMode;
-        _gameSetup.PlayerCarPrefab = _carDatabase.cars[_currCarIndex].CarPrefab;
+        _gameSetup.PlayerCarPrefab = _carDatabase.cars[_currCarIndex].PlayerCarPrefab;
         _gameSetup.CountLaps = _countLaps;
         _gameSetup.CountPlayers = _countPlayers;
-        string mapName = _mapDatabase.maps[_currMapIndex].SceneName;
+        string mapName = currMaps[_currMapIndex].SceneName;
         SceneManager.LoadScene(mapName);
     }
 
@@ -136,4 +145,6 @@ public class SelectModeController : MonoBehaviour
     public void SetSprintGameMode() => _currentGameMode = GameMode.Sprint;
     
     public void SetEliminationGameMode() => _currentGameMode = GameMode.Elimination;
+
+    public void Exit() => SceneManager.LoadScene("MainMenu");
 }
