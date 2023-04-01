@@ -31,8 +31,8 @@ public class SelectModeController : MonoBehaviour
     private MapMenuItem[] currMaps;
     private int _currMapIndex;
     private GameMode _currentGameMode;
-    private int _countPlayers;
-    private int _countLaps;
+    private int _countPlayers = 1;
+    private int _countLaps = 1;
 
     public void ShowGameSettings()
     {
@@ -105,7 +105,7 @@ public class SelectModeController : MonoBehaviour
 
     public void DecCountPlayers()
     {
-        if(_countPlayers>0)
+        if(_countPlayers>1)
             _countPlayers--;
         SetCountPlayers();
     }
@@ -119,7 +119,7 @@ public class SelectModeController : MonoBehaviour
 
     public void DecCountLaps()
     {
-        if(_countLaps>0)
+        if(_countLaps>1)
             _countLaps--;
         SetCountLaps();
     }
@@ -134,16 +134,25 @@ public class SelectModeController : MonoBehaviour
         SceneManager.LoadScene(mapName);
     }
 
-    private void SetCountPlayers() => _countPlayersText.text = _countPlayers.ToString();
+    private void SetCountPlayers()
+    {
+        _countPlayersText.text = _countPlayers.ToString();
+        if(_currentGameMode==GameMode.Elimination)
+            _countLaps = _countPlayers;
+    } 
     
     private void SetCountLaps() => _countLapsText.text = _countLaps.ToString();
 
     public void HideGameModes() => _gameModes.SetActive(false);
     
     public void SetRingGameMode() => _currentGameMode = GameMode.Ring;
-    
-    public void SetSprintGameMode() => _currentGameMode = GameMode.Sprint;
-    
+
+    public void SetSprintGameMode()
+    {
+        _currentGameMode = GameMode.Sprint;
+        _countLaps = 1;
+    }
+
     public void SetEliminationGameMode() => _currentGameMode = GameMode.Elimination;
 
     public void Exit() => SceneManager.LoadScene("MainMenu");

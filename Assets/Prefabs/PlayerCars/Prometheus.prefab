@@ -579,12 +579,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14c48f241d7953448ee6e4cf66ea0be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Prometheus
   CarLapTimer: {fileID: 5766285872026178911}
   RacePosition: {fileID: 3505839686290688037}
   isFirstLap: 1
-  maxSpeed: 130
+  maxSpeed: 190
   maxReverseSpeed: 45
-  accelerationMultiplier: 5
+  accelerationMultiplier: 6
   maxSteeringAngle: 27
   steeringSpeed: 0.5
   brakeForce: 350

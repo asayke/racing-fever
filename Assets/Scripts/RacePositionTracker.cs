@@ -25,9 +25,10 @@ public class RacePositionTracker : MonoBehaviour
         if (GetDistToPoint() <= _wayPointDetectDist)
         {
             _currPointIndex = (_currPointIndex+1) % _wayPoints.Count;
-            _racePosition.nextPoint = _currPointIndex;
-            _racePosition.countLaps = _car.CarLapInfo.CountLaps;
         }
+        
+        _racePosition.nextPoint = _currPointIndex;
+        _racePosition.countLaps = _car.CarLapInfo.CountLaps;
 
         _racePosition.distToPoint = GetDistToPoint();
     }

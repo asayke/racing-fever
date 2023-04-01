@@ -15,7 +15,7 @@ public class GameSetup : MonoBehaviour
 
     [SerializeField] private CarDatabase _carDatabase;
     [SerializeField] private List<Transform> _carPositions;
-    [SerializeField] private CinemachineVirtualCamera _playerCamera;
+    [SerializeField] private CameraSwitcher _cameraSwitcher;
 
     private GameObject playerCar;
     private Countdown _countdown;
@@ -38,17 +38,20 @@ public class GameSetup : MonoBehaviour
 
     private void StartSetup(Scene scene, LoadSceneMode loadMode)
     {
-        if(scene.name=="SelectMode")
+        if(scene.name=="SelectMode" || scene.name=="MainMenu")
             return;
         _countdown = GetComponent<Countdown>();
         _raceController = FindObjectOfType<RaceController>();
-        _playerCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        _cameraSwitcher = FindObjectOfType<CameraSwitcher>();
         
         GetCarPositions();
         playerCar = Instantiate(PlayerCarPrefab, _carPositions[0].position, Quaternion.identity);
         playerCar.transform.Rotate(new Vector3(0,90,0));
-        _playerCamera.Follow = playerCar.transform;
-        _playerCamera.LookAt = playerCar.transform;
+        foreach (var cam in _cameraSwitcher.Cams)
+        {
+            cam.Follow = playerCar.transform;
+            cam.LookAt = playerCar.transform;
+        }
         _raceController.RegisterCar(playerCar.GetComponent<Car>());
 
         for (int i = 1; i <= CountPlayers; i++)
