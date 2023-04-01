@@ -17,8 +17,6 @@ public class RaceController : MonoBehaviour
     private List<RacePosition> _racePositions = new List<RacePosition>();
 
     private List<Car> _finishedCars = new List<Car>();
-    
-    
 
     private Car _playerCar;
 
@@ -69,10 +67,10 @@ public class RaceController : MonoBehaviour
                 return;
             }
             DeleteCarFromRace(car);
-            if (_cars.Count == 2 && _racePositions.IndexOf(_playerCar.RacePosition) == 0)
-            {
-                EndElimination(true, _playerCar.CarLapInfo.CountLaps);
-            }
+            
+        } else if (_cars.Count == 2 && _racePositions.IndexOf(_playerCar.RacePosition) == 0)
+        {
+            EndElimination(true, _playerCar.CarLapInfo.CountLaps);
         }
     }
 
