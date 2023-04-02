@@ -725,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14c48f241d7953448ee6e4cf66ea0be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Prometheus
+  Name: YellowPrometheus
   CarLapTimer: {fileID: 7342923231837285262}
   RacePosition: {fileID: 379856167493727988}
   isFirstLap: 1
@@ -755,7 +755,7 @@ MonoBehaviour:
   carSpeed: 0
   isDrifting: 0
   isTractionLocked: 0
-  isMoveAllow: 1
+  isMoveAllow: 0
 --- !u!114 &7342923231837285262
 MonoBehaviour:
   m_ObjectHideFlags: 0

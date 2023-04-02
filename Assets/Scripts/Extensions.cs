@@ -10,7 +10,6 @@ public static class Extensions
         int minutes = (int) (timeInSec / 60);
         int seconds = (int) (timeInSec % 60);
         int ms = (int) ((timeInSec - Math.Truncate(timeInSec)) * 1000);
-        Debug.Log(seconds+" "+ms);
         TimeSpan timeSpan = new TimeSpan(0, 0, minutes, seconds, ms);
         return timeSpan.ToString(@"m\:ss\:ff");
     }

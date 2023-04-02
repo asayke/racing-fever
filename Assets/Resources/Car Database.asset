@@ -19,9 +19,21 @@ MonoBehaviour:
     EnemyCarPrefab: {fileID: 427347188595116413, guid: 1903e4b6e33c4b24eb6a57d0525e48f5, type: 3}
   - Name: PurpleSportCar
     Sprite: {fileID: 0}
-    PlayerCarPrefab: {fileID: 0}
+    PlayerCarPrefab: {fileID: 8765351055261322523, guid: 0854fd8483c562243aa1de5589e681d8, type: 3}
     EnemyCarPrefab: {fileID: 2105114767582205335, guid: 548d254e447d29143ac54e1cd413f6c2, type: 3}
-  - Name: BlueCar
+  - Name: SportCar
     Sprite: {fileID: 0}
     PlayerCarPrefab: {fileID: 0}
     EnemyCarPrefab: {fileID: 8091673838198700748, guid: d5fd85d39f66b574aaf2006a6773ef86, type: 3}
+  - Name: BluePrometheus
+    Sprite: {fileID: 0}
+    PlayerCarPrefab: {fileID: 8886035327309602676, guid: a96e7efb38b42bb46ac06afa5d550566, type: 3}
+    EnemyCarPrefab: {fileID: 427347188595116413, guid: 9c8722ad2cd59ad45b5171a4f4f6969c, type: 3}
+  - Name: GreenPrometheus
+    Sprite: {fileID: 0}
+    PlayerCarPrefab: {fileID: 8886035327309602676, guid: c4f4178767147db4bb1e04d8b31f38a3, type: 3}
+    EnemyCarPrefab: {fileID: 427347188595116413, guid: e767020ed885fe74881bd56326f6fe03, type: 3}
+  - Name: YellowPrometheus
+    Sprite: {fileID: 0}
+    PlayerCarPrefab: {fileID: 8886035327309602676, guid: ed9ec38d17f2874448aac28f91b4c44e, type: 3}
+    EnemyCarPrefab: {fileID: 427347188595116413, guid: ffefa2b4964d47242992244e6ca51302, type: 3}

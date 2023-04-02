@@ -49,7 +49,7 @@ public class RaceController : MonoBehaviour
             HandleElimination(car);
             return;
         }
-        if(car.CarLapInfo.CountLaps==CountLaps)
+        if(car.CarLapInfo.CountLaps>=CountLaps)
             FinishCar(car);
         print("lap info: "+car.CarLapInfo.CountLaps+" "+car.CarLapInfo.LapTimes[^1]);
     }

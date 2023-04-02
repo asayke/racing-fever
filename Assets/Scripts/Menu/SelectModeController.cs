@@ -41,9 +41,15 @@ public class SelectModeController : MonoBehaviour
     private int _countPlayers = 1;
     private int _countLaps = 1;
 
-    private void Awake()
+    private List<CarMenuItem> _aviableCars = new List<CarMenuItem>();
+
+    private void Start()
     {
-        print(FindObjectsOfType<GameSetup>().Length);
+        foreach (var carMenuItem in _carDatabase.cars)
+        {
+            if(carMenuItem.PlayerCarPrefab!=null)
+                _aviableCars.Add(carMenuItem);
+        }
     }
 
     public void ShowGameSettings()
@@ -82,7 +88,7 @@ public class SelectModeController : MonoBehaviour
 
     public void ShowCarItem()
     {
-        CarMenuItem item = _carDatabase.cars[_currCarIndex];
+        CarMenuItem item = _aviableCars[_currCarIndex];
         _carImage.sprite = item.Sprite;
         _carName.text = item.Name;
     }
@@ -97,7 +103,7 @@ public class SelectModeController : MonoBehaviour
     public void NextCar()
     {
         _currCarIndex++;
-        _currCarIndex = _currCarIndex % _carDatabase.cars.Length;
+        _currCarIndex = _currCarIndex % _aviableCars.Count;
         ShowCarItem();
     }
 
@@ -105,7 +111,7 @@ public class SelectModeController : MonoBehaviour
     {
         _currCarIndex--;
         if (_currCarIndex < 0)
-            _currCarIndex = _carDatabase.cars.Length - 1;
+            _currCarIndex = _aviableCars.Count - 1;
         ShowCarItem();
     }
     
@@ -156,7 +162,7 @@ public class SelectModeController : MonoBehaviour
     {
         print("start game");
         _gameSetup.GameMode = _currentGameMode;
-        _gameSetup.PlayerCarPrefab = _carDatabase.cars[_currCarIndex].PlayerCarPrefab;
+        _gameSetup.PlayerCarPrefab = _aviableCars[_currCarIndex].PlayerCarPrefab;
         _gameSetup.CountLaps = _countLaps;
         _gameSetup.CountPlayers = _countPlayers;
         string mapName = currMaps[_currMapIndex].SceneName;
@@ -165,7 +171,7 @@ public class SelectModeController : MonoBehaviour
 
     public void StartMiniGame()
     {
-        _distanceMiniGameController.PlayerCarPrefab = _carDatabase.cars[_currCarIndex].PlayerCarPrefab;
+        _distanceMiniGameController.PlayerCarPrefab = _aviableCars[_currCarIndex].PlayerCarPrefab;
         string mapName = currMaps[_currMapIndex].SceneName;
         SceneManager.LoadScene(mapName);
     }

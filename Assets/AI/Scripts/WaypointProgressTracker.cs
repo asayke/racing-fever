@@ -60,7 +60,7 @@ public class WaypointProgressTracker : MonoBehaviour
         if (target == null) target = new GameObject(name + " Waypoint Target").transform;
 
         Reset();
-        circuit = FindObjectOfType<WaypointCircuit>();
+        //circuit = FindObjectOfType<WaypointCircuit>();
     }
 
 

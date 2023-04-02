@@ -292,7 +292,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 33538749733570355, guid: 98c57f100a7d7684dba02b8725bbc5d8, type: 3}
       propertyPath: m_Name
-      value: PurpleSportCar
+      value: PurpleSportCar Variant
       objectReference: {fileID: 0}
     - target: {fileID: 809794695439113609, guid: 98c57f100a7d7684dba02b8725bbc5d8, type: 3}
       propertyPath: m_RootOrder
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14c48f241d7953448ee6e4cf66ea0be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Purple
+  Name: PurpleSportCar
   CarLapTimer: {fileID: 1557929916}
   RacePosition: {fileID: 1557929915}
   isFirstLap: 1
@@ -428,7 +428,7 @@ MonoBehaviour:
   carSpeed: 0
   isDrifting: 0
   isTractionLocked: 0
-  isMoveAllow: 1
+  isMoveAllow: 0
 --- !u!114 &1557929914
 MonoBehaviour:
   m_ObjectHideFlags: 0
