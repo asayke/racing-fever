@@ -17,6 +17,10 @@ MonoBehaviour:
     Sprite: {fileID: 0}
     PlayerCarPrefab: {fileID: 5670931028646748581, guid: 01c36781221711c48b0ac16bdf73897e, type: 3}
     EnemyCarPrefab: {fileID: 427347188595116413, guid: 1903e4b6e33c4b24eb6a57d0525e48f5, type: 3}
+  - Name: PurpleSportCar
+    Sprite: {fileID: 0}
+    PlayerCarPrefab: {fileID: 0}
+    EnemyCarPrefab: {fileID: 2105114767582205335, guid: 548d254e447d29143ac54e1cd413f6c2, type: 3}
   - Name: BlueCar
     Sprite: {fileID: 0}
     PlayerCarPrefab: {fileID: 0}
