@@ -5,4 +5,5 @@ public class MapDatabase : ScriptableObject
 {
     public MapMenuItem[] ringMaps;
     public MapMenuItem[] sprintMaps;
+    public MapMenuItem _distanceMiniGame;
 }

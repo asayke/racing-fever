@@ -1,17 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
 public class SelectModeController : MonoBehaviour
 {
-    [SerializeField] private GameSetup _gameSetup;
+    [SerializeField] private GameObject _gameSetupPrefab, _distanceMiniGamePrefab;
+    private GameSetup _gameSetup;
+    private DistanceMiniGameController _distanceMiniGameController;
     [SerializeField] private GameObject _gameModes;
+    [SerializeField] private GameObject _miniGames;
     [SerializeField] private GameObject _mapSelector;
     [SerializeField] private GameObject _carSelector;
     [SerializeField] private GameObject _countPlayersSettings;
     [SerializeField] private GameObject _countLapsSettings;
-    [SerializeField] private GameObject _playButton;
 
     [SerializeField] private Image _carImage;
     [SerializeField] private Text _carName;
@@ -20,6 +25,8 @@ public class SelectModeController : MonoBehaviour
 
     [SerializeField] private Text _countPlayersText;
     [SerializeField] private Text _countLapsText;
+
+    [SerializeField] private Button _playButton;
 
     [SerializeField] private CarDatabase _carDatabase;
     [SerializeField] private MapDatabase _mapDatabase;
@@ -34,11 +41,19 @@ public class SelectModeController : MonoBehaviour
     private int _countPlayers = 1;
     private int _countLaps = 1;
 
+    private void Awake()
+    {
+        print(FindObjectsOfType<GameSetup>().Length);
+    }
+
     public void ShowGameSettings()
     {
+        _gameSetup = Instantiate(_gameSetupPrefab).GetComponent<GameSetup>();
         _mapSelector.SetActive(true);
         _carSelector.SetActive(true);
-        _playButton.SetActive(true);
+        _playButton.gameObject.SetActive(true);
+        _playButton.onClick.RemoveAllListeners();
+        _playButton.onClick.AddListener(StartGame);
         _countPlayersSettings.SetActive(true);
         if(_currentGameMode==GameMode.Ring)
             _countLapsSettings.SetActive(true);
@@ -50,6 +65,19 @@ public class SelectModeController : MonoBehaviour
         
         ShowCarItem();
         ShowMapItem();
+    }
+
+    public void ShowMiniGameSettings()
+    {
+        _distanceMiniGameController = Instantiate(_distanceMiniGamePrefab).GetComponent<DistanceMiniGameController>();
+        currMaps = new MapMenuItem[1];
+        currMaps[0] = _mapDatabase._distanceMiniGame;
+        
+        _carSelector.SetActive(true);
+        _playButton.gameObject.SetActive(true);
+        _playButton.onClick.RemoveAllListeners();
+        _playButton.onClick.AddListener(StartMiniGame);
+        ShowCarItem();
     }
 
     public void ShowCarItem()
@@ -126,10 +154,18 @@ public class SelectModeController : MonoBehaviour
 
     public void StartGame()
     {
+        print("start game");
         _gameSetup.GameMode = _currentGameMode;
         _gameSetup.PlayerCarPrefab = _carDatabase.cars[_currCarIndex].PlayerCarPrefab;
         _gameSetup.CountLaps = _countLaps;
         _gameSetup.CountPlayers = _countPlayers;
+        string mapName = currMaps[_currMapIndex].SceneName;
+        SceneManager.LoadScene(mapName);
+    }
+
+    public void StartMiniGame()
+    {
+        _distanceMiniGameController.PlayerCarPrefab = _carDatabase.cars[_currCarIndex].PlayerCarPrefab;
         string mapName = currMaps[_currMapIndex].SceneName;
         SceneManager.LoadScene(mapName);
     }
@@ -144,6 +180,10 @@ public class SelectModeController : MonoBehaviour
     private void SetCountLaps() => _countLapsText.text = _countLaps.ToString();
 
     public void HideGameModes() => _gameModes.SetActive(false);
+
+    public void ShowMiniGames() => _miniGames.SetActive(true);
+    
+    public void HideMiniGames() => _miniGames.SetActive(false);
     
     public void SetRingGameMode() => _currentGameMode = GameMode.Ring;
 
@@ -154,6 +194,8 @@ public class SelectModeController : MonoBehaviour
     }
 
     public void SetEliminationGameMode() => _currentGameMode = GameMode.Elimination;
+
+    public void SetDistanceMiniGame() => _currentGameMode = GameMode.DistanceMiniGame;
 
     public void Exit() => SceneManager.LoadScene("MainMenu");
 }

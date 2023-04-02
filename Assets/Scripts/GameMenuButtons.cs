@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameMenuButtons : MonoBehaviour
@@ -28,5 +29,5 @@ public class GameMenuButtons : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    private void Exit() => Application.Quit();
+    private void Exit() => SceneManager.LoadScene("MainMenu");
 }

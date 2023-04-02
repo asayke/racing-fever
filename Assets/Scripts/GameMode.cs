@@ -3,5 +3,6 @@ public enum GameMode
 {
     Ring,
     Sprint,
-    Elimination
+    Elimination,
+    DistanceMiniGame
 }

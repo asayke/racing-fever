@@ -15,10 +15,7 @@ public class RaceController : MonoBehaviour
 
     private List<Car> _cars = new List<Car>();
     private List<RacePosition> _racePositions = new List<RacePosition>();
-
     private List<Car> _finishedCars = new List<Car>();
-    
-    
 
     private Car _playerCar;
 
@@ -139,5 +136,17 @@ public class RaceController : MonoBehaviour
             "Позиция: " + (_racePositions.IndexOf(_playerCar.RacePosition) + 1) + "/" + _racePositions.Count;
         _raceInfoUI.LapsText.text = "Круг: " + (_playerCar.CarLapInfo.CountLaps + 1) + "/" + CountLaps;
         _raceInfoUI.TimeText.text = "Время: "+_playerCar.CarLapTimer.AllTime.GetTimeString();
+    }
+
+    public void Clear()
+    {
+        foreach (var car in _cars)
+        {
+            Destroy(car.gameObject);
+        }
+        _cars.Clear();
+        _racePositions.Clear();
+        _finishedCars.Clear();
+        isRaceStarted = false;
     }
 }

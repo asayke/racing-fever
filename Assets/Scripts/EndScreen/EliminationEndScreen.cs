@@ -27,6 +27,7 @@ public class EliminationEndScreen : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1;
+        FindObjectOfType<GameSetup>().Restart();
     }
     
     public void Exit()

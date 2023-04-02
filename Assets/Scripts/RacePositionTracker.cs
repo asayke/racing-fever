@@ -33,6 +33,14 @@ public class RacePositionTracker : MonoBehaviour
         _racePosition.distToPoint = GetDistToPoint();
     }
 
+    public Vector3 GetLastPoint()
+    {
+        int lastPointIndex = _currPointIndex - 1;
+        if (lastPointIndex < 0)
+            lastPointIndex = 0;
+        return _wayPoints[lastPointIndex].position;
+    }
+
     private float GetDistToPoint()
     {
         Vector3 currPos = transform.position;

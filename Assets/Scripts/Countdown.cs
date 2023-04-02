@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class Countdown : MonoBehaviour
 
     public void StartCountdown()
     {
+        currSec = 3;
         Time.timeScale = 1;
         _text.enabled = true;
         _aiCars = FindObjectsOfType<ArcadeAiVehicleController>();
@@ -32,9 +34,20 @@ public class Countdown : MonoBehaviour
         {
             _text.enabled = false;
             FindObjectOfType<PrometeoCarController>().isMoveAllow = true;
-            foreach (var aiCar in _aiCars) 
-                aiCar.enabled = true;
-            _raceController.StartRace();
+            print(_aiCars.Length);
+            foreach (var aiCar in _aiCars)
+            {
+                try
+                {
+                    aiCar.enabled = true;
+                }
+                catch (MissingReferenceException e)
+                {
+                    
+                }
+            }
+            if(_raceController!=null)
+                _raceController.StartRace();
         }
         
     }

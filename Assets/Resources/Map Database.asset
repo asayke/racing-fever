@@ -34,3 +34,8 @@ MonoBehaviour:
     isRing: 0
     Name: "\u0421\u043F\u0440\u0438\u043D\u0442 2"
     Sprite: {fileID: 0}
+  _distanceMiniGame:
+    SceneName: MiniGame1
+    isRing: 0
+    Name: 
+    Sprite: {fileID: 0}
