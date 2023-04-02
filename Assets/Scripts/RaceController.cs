@@ -66,10 +66,10 @@ public class RaceController : MonoBehaviour
                 return;
             }
             DeleteCarFromRace(car);
-            if (_cars.Count == 2 && _racePositions.IndexOf(_playerCar.RacePosition) == 0)
-            {
-                EndElimination(true, _playerCar.CarLapInfo.CountLaps);
-            }
+            
+        } else if (_cars.Count == 2 && _racePositions.IndexOf(_playerCar.RacePosition) == 0)
+        {
+            EndElimination(true, _playerCar.CarLapInfo.CountLaps);
         }
     }
 
