@@ -17,7 +17,7 @@ public class MainMenuButtons : MonoBehaviour
 
     private void Play() => SceneManager.LoadScene("SelectMode");
 
-    private void Statistics() => SceneManager.LoadScene("Statistic");
+    private void Statistics() => Debug.Log("statistic");
     
     private void Exit() => Application.Quit();
 }

@@ -16,24 +16,24 @@ MonoBehaviour:
   - SceneName: Circuit1
     isRing: 1
     Name: "\u041A\u0440\u0443\u0433 1"
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 704ca0a667cb08e47aa76a78818662e3, type: 3}
   - SceneName: Circuit2
     isRing: 1
     Name: "\u041A\u0440\u0443\u0433 2"
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 09bbb88dd4e19214688daac4b5f22621, type: 3}
   - SceneName: TestScene
     isRing: 1
     Name: "\u041A\u0440\u0443\u0433 3"
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 9e5488925a84af446bf2657a8de57109, type: 3}
   sprintMaps:
   - SceneName: Sprint1
     isRing: 0
     Name: "\u0421\u043F\u0440\u0438\u043D\u0442 1"
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 2a4074a422e595f41bd2dfb31c83a4f1, type: 3}
   - SceneName: Sprint2
     isRing: 0
     Name: "\u0421\u043F\u0440\u0438\u043D\u0442 2"
-    Sprite: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: 618e048c22d8486459aab7d0657d82ca, type: 3}
   _distanceMiniGame:
     SceneName: MiniGame1
     isRing: 0

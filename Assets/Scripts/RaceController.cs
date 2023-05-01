@@ -21,9 +21,22 @@ public class RaceController : MonoBehaviour
 
     private bool isRaceStarted;
  
-    private void OnEnable() => _finishTrigger.OnFinished += OnFinish;
+    private void OnEnable()
+    {
+        foreach (var finishTrigger in FindObjectsOfType<FinishTrigger>())
+        {
+            finishTrigger.OnFinished += OnFinish;
+        }
+        
+    }
 
-    private void OnDisable() => _finishTrigger.OnFinished -= OnFinish;
+    private void OnDisable()
+    {
+        foreach (var finishTrigger in FindObjectsOfType<FinishTrigger>())
+        {
+            finishTrigger.OnFinished -= OnFinish;
+        }
+    }
 
     private void OnFinish(CarFinishChecker car)
     {
