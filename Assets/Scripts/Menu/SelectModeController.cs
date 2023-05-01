@@ -8,9 +8,10 @@ using UnityEngine.UI;
 
 public class SelectModeController : MonoBehaviour
 {
-    [SerializeField] private GameObject _gameSetupPrefab, _distanceMiniGamePrefab;
+    [SerializeField] private GameObject _gameSetupPrefab, _distanceMiniGamePrefab, _rectsMiniGamePrefab;
     private GameSetup _gameSetup;
     private DistanceMiniGameController _distanceMiniGameController;
+    private RectsMiniGameController _rectsMiniGameController;
     [SerializeField] private GameObject _gameModes;
     [SerializeField] private GameObject _miniGames;
     [SerializeField] private GameObject _mapSelector;
@@ -78,6 +79,19 @@ public class SelectModeController : MonoBehaviour
         _distanceMiniGameController = Instantiate(_distanceMiniGamePrefab).GetComponent<DistanceMiniGameController>();
         currMaps = new MapMenuItem[1];
         currMaps[0] = _mapDatabase._distanceMiniGame;
+        
+        _carSelector.SetActive(true);
+        _playButton.gameObject.SetActive(true);
+        _playButton.onClick.RemoveAllListeners();
+        _playButton.onClick.AddListener(StartMiniGame);
+        ShowCarItem();
+    }
+
+    public void ShowRectsMiniGameSettings()
+    {
+        _rectsMiniGameController = Instantiate(_rectsMiniGamePrefab).GetComponent<RectsMiniGameController>();
+        currMaps = new MapMenuItem[1];
+        currMaps[0] = _mapDatabase._rectsMiniGame;
         
         _carSelector.SetActive(true);
         _playButton.gameObject.SetActive(true);
@@ -171,7 +185,11 @@ public class SelectModeController : MonoBehaviour
 
     public void StartMiniGame()
     {
-        _distanceMiniGameController.PlayerCarPrefab = _aviableCars[_currCarIndex].PlayerCarPrefab;
+        if(_distanceMiniGameController!=null)
+            _distanceMiniGameController.PlayerCarPrefab = _aviableCars[_currCarIndex].PlayerCarPrefab;
+        if (_rectsMiniGameController != null)
+            _rectsMiniGameController.PlayerCarPrefab = _aviableCars[_currCarIndex].PlayerCarPrefab;
+        
         string mapName = currMaps[_currMapIndex].SceneName;
         SceneManager.LoadScene(mapName);
     }

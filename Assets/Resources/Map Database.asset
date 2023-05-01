@@ -39,3 +39,8 @@ MonoBehaviour:
     isRing: 0
     Name: 
     Sprite: {fileID: 0}
+  _rectsMiniGame:
+    SceneName: MiniGame2
+    isRing: 0
+    Name: 
+    Sprite: {fileID: 0}

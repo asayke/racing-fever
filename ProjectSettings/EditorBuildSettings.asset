@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sprint2.unity
     guid: df8bac76e1378754cb0c5461895d8794
+  - enabled: 1
+    path: Assets/Scenes/MiniGame2.unity
+    guid: e6249b149907c1c4fb0ac55a42766aa3
   m_configObjects: {}
