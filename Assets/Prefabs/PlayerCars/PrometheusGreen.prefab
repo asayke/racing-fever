@@ -729,14 +729,14 @@ MonoBehaviour:
   CarLapTimer: {fileID: 7342923231837285262}
   RacePosition: {fileID: 379856167493727988}
   isFirstLap: 1
-  maxSpeed: 190
-  maxReverseSpeed: 45
-  accelerationMultiplier: 6
-  maxSteeringAngle: 35
-  steeringSpeed: 0.5
-  brakeForce: 350
-  decelerationMultiplier: 2
-  handbrakeDriftMultiplier: 5
+  maxSpeed: 180
+  maxReverseSpeed: 120
+  accelerationMultiplier: 10
+  maxSteeringAngle: 45
+  steeringSpeed: 0.713
+  brakeForce: 399
+  decelerationMultiplier: 5
+  handbrakeDriftMultiplier: 10
   bodyMassCenter: {x: 0, y: 0, z: 0}
   frontLeftMesh: {fileID: 846592966842120198}
   frontLeftCollider: {fileID: 7830836607084080923}
