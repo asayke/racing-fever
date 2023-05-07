@@ -2,8 +2,6 @@
 
 # Ассеты машин:
 
-ARCADE - FREE Racing Car https://assetstore.unity.com/packages/3d/vehicles/land/arcade-free-racing-car-161085
-
 Car Controller https://assetstore.unity.com/packages/templates/packs/car-controller-202269
 
 Modern Touring Car Pack Demo https://assetstore.unity.com/packages/3d/vehicles/land/modern-touring-car-pack-demo-132820
@@ -11,6 +9,8 @@ Modern Touring Car Pack Demo https://assetstore.unity.com/packages/3d/vehicles/l
 PROMETEO: Car Controller https://assetstore.unity.com/packages/tools/physics/prometeo-car-controller-209444
 
 # Ассеты игрового окружения: 
+
+EasyRoads3d Free https://assetstore.unity.com/packages/3d/characters/easyroads3d-free-v3-987
 
 Low Poly Rock Pack https://assetstore.unity.com/packages/3d/environments/low-poly-rock-pack-57874
 
@@ -31,3 +31,5 @@ Polygon City Pack - Environment and Interior [Free] https://assetstore.unity.com
 Polygon Trees https://assetstore.unity.com/packages/3d/vegetation/trees/polygon-trees-224068
 
 Mountains Canyons Cliffs https://assetstore.unity.com/packages/3d/environments/landscapes/mountains-canyons-cliffs-53984
+
+Картинки, являющиеся логотипами для режимов игры, сгенерированы при помощи Midjourney
